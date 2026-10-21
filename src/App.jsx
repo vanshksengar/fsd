@@ -7,11 +7,18 @@ const App = () => {
 
   // Add and Update Task
   const addHandler = () => {
+    if(editIndex ==null) {
+const updatedList = [...todoList];
+updatedList[editIndex] = task;
+setTodoList([...updatedList]);
+setEditIndex(null);
+}else{
+setTodoList([...todoList, task]);
+settask("");
     if (task.trim() === "") {
       alert("Please enter a task!");
       return;
     }
-
     if (editIndex !== null) {
       const updatedList = [...todoList];
       updatedList[editIndex] = task;
@@ -24,15 +31,16 @@ const App = () => {
     setTask("");
   };
 
-  // Edit Task
   const editHandler = (index) => {
     setTask(todoList[index]);
     setEditIndex(index);
   };
 
-  // Delete Task
   const deleteHandler = (index) => {
-    setTodoList(todoList.filter((_, i) => i !== index));
+  setTodoList(todoList.filter((_, i) => i !== index));
+  const updatedList = todoList.filter((d, i) => index != 1);
+  setTodoList([...updatedList]);
+};
 
     if (editIndex === index) {
       setTask("");
